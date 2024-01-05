@@ -2,7 +2,6 @@ import { Icons } from "@/components/Icons";
 import { Modals } from "@/components/modals/modals";
 import { CountryCode } from "@/types/products";
 
-
 export const CATGEORY_ITEMS = ["BRANDS", "OFFERS", "HEALTH PACKAGES"];
 
 export const SORT_BY_ITEMS = [
@@ -137,14 +136,13 @@ export const STORE_DATA_INIT = {
   },
 };
 
-
-export const DELIVERY_OPTIONS= [
+export const DELIVERY_OPTIONS = [
   {
-    title:"Home Delivery",
-    value:"home_delivery"
+    title: "Home Delivery",
+    value: "home_delivery",
   },
   {
-    title:"Collect From Store",
-    value:"collect_from_store"
+    title: "Collect From Store",
+    value: "collect_from_store",
   },
-]
+];

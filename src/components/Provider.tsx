@@ -5,6 +5,7 @@ import {
   QueryClient,
   HydrationBoundary,
 } from "@tanstack/react-query";
+import { SessionProvider } from "next-auth/react";
 
 interface ProviderProps {
   children: ReactNode;
@@ -24,10 +25,12 @@ export function Providers({ children, pageProps }: ProviderProps) {
       })
   );
   return (
-    <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={pageProps.dehydratedState}>
-        <NiceModal.Provider>{children}</NiceModal.Provider>
-      </HydrationBoundary>
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <NiceModal.Provider>{children}</NiceModal.Provider>
+        </HydrationBoundary>
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }

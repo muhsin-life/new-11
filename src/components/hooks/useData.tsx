@@ -14,6 +14,7 @@ import { SearchSuggestionProps } from "@/types/searchSuggestions";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosRequestConfig } from "axios";
 import { useRouter } from "next/router";
+import { Auth } from "@/types/cart";
 
 export const useProducts = (type_key: string, slug: string) => {
   const { locale } = useRouter();
@@ -158,7 +159,7 @@ export const useCreateCart = (payload: PayloadProps) => {
   return useQuery({
     queryKey: ["create-cart"],
     queryFn: async () => {
-      var requestOptions: AxiosRequestConfig = {
+      const requestOptions: AxiosRequestConfig = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -175,5 +176,21 @@ export const useCreateCart = (payload: PayloadProps) => {
       return data as CartSuccessProps;
     },
     enabled: false,
+  });
+};
+
+export const useConfig = (locale: locale) => {
+  return useQuery({
+    queryKey: ["get-config"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `https://${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/config?lang=${locale}`
+      );
+      return data as {
+        success: boolean;
+        message: string;
+        data: Auth;
+      };
+    },
   });
 };

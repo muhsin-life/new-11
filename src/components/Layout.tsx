@@ -1,8 +1,13 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  
+  useEffect(() => {
+
+  }, []);
+
   return (
     <>
       <Navbar />

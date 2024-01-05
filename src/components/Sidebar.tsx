@@ -1,22 +1,19 @@
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardDescription } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
-import { useRouter, withRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 import { Label } from "./ui/label";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 import { Category } from "@/types/categories";
 import { useBrands, useCategories } from "./hooks/useData";
 import { Tree } from "./ui/tree";
-import { Folder, Workflow } from "lucide-react";
 import { filterProps } from "./ProductPageListing";
-import { stringify } from "querystring";
 import {
   parseAsArrayOf,
   parseAsInteger,
@@ -101,7 +98,6 @@ export const CategoriesSidebar = ({
     clearExistingQueries,
   }: filterProps) => void;
 }) => {
-
   const id = React.useId();
 
   const [brandsQuery, setBrandsQuery] = useQueryState(
@@ -137,21 +133,6 @@ export const CategoriesSidebar = ({
 
   return (
     <div className="col-span-3">
-      {/* <Sheet>
-                <SheetTrigger asChild>
-                  <Button
-                    aria-label="Filter products"
-                    size="sm"
-                    disabled={isPending}
-                  >
-                    Filter
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="flex flex-col">
-                  <SheetHeader className="px-1">
-                    <SheetTitle>Filters</SheetTitle>
-                  </SheetHeader>
-                  <Separator /> */}
       <div className="flex flex-1 flex-col gap-5 overflow-hidden p-1">
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <div className="gap-1">
@@ -249,21 +230,7 @@ export const CategoriesSidebar = ({
               Categories
             </h3>
             <div className="flex items-center space-x-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                // onClick={() => {
-                //   startTransition(() => {
-                //     push(
-                //       `${pathname}?${createQueryString({
-                //         store_page: Number("1") - 1,
-                //       })}`
-                //     );
-                //   });
-                // }}
-                // disabled={Number("1") === 1 || isPending}
-              >
+              <Button variant="ghost" size="icon" className="h-8 w-8">
                 <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
                 <span className="sr-only">Previous page</span>
               </Button>
@@ -339,42 +306,6 @@ export const CategoriesSidebar = ({
           </ScrollArea>
         </Card>
       </div>
-      {/* <div>
-                    <Separator className="my-4" />
-                    <SheetFooter>
-                      <Button
-                        aria-label="Clear filters"
-                        size="sm"
-                        className="w-full"
-                        onClick={() => {
-                          startTransition(() => {
-                            // router.push(
-                            //   `${pathname}?${createQueryString({
-                            //     price_range: 0 - 100,
-                            //     store_ids: null,
-                            //     categories: null,
-                            //     subcategories: null,
-                            //     active: "true",
-                            //   })}`,
-                            //   {
-                            //     scroll: false,
-                            //   }
-                            // );
-
-                            setPriceRange([0, 100]);
-                            // setSelectedCategories(null);
-                            // setSelectedSubcategories(null);
-                            // setStoreIds(null);
-                          });
-                        }}
-                        disabled={isPending}
-                      >
-                        Clear Filters
-                      </Button>
-                    </SheetFooter>
-                  </div>
-                </SheetContent>
-              </Sheet> */}
     </div>
   );
 };

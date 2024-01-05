@@ -1,7 +1,9 @@
+import { useSession } from "next-auth/react";
 import { Icons } from "./Icons";
 import { Modals } from "./modals/modals";
 
 export const NavItems = () => {
+  const { data: session } = useSession();
   type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
   const NAVBAR_ITEMS = [
@@ -19,7 +21,15 @@ export const NavItems = () => {
       label: "Log in",
       value: "account" as const,
       icon: Icons.account,
-      buttonProps: {} as ButtonProps,
+      buttonProps: {
+        onClick: () => {
+          if (!session) {
+            Modals.show("auth-modal");
+          } else {
+            Modals.show("account-dashboard");
+          }
+        },
+      } as ButtonProps,
     },
     {
       label: "Wishlist",
@@ -38,6 +48,7 @@ export const NavItems = () => {
       } as ButtonProps,
     },
   ];
+
   return (
     <div className=" items-center xl:flex hidden">
       {NAVBAR_ITEMS.map((navItem, indx) => (

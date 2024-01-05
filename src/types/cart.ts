@@ -335,13 +335,26 @@ export interface CartDetails {
   allow_checkout: boolean;
   driver_tips: DriverTip[];
   available_offers: any[];
-  available_payment_methods: any[];
+  available_payment_methods: PaymentMethods[];
   is_tip_enabled: boolean;
   membership: null;
   available_wallet_balance: number;
   cart_token: string;
 }
+interface PaymentMethods{
+    method:       string;
+    title:        string;
+    short_title:  string;
+    heading:      string;
+    description:  string;
+    icon:         string;
+    icon_url:     string;
+    selected:     boolean;
+    fees?:        number;
+    cart_refresh: boolean;
+    error:        boolean;
 
+}
 export interface CartData {
   cart_id: number;
   coupon_applied: null;

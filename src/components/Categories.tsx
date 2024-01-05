@@ -119,6 +119,7 @@ export function MainNav() {
               >
                 Shop by Category
               </NavigationMenuTrigger>
+
               <NavigationMenuContent>
                 <ul className="grid  bg-accent gap-1 p-1.5 grid-cols-12 w-full">
                   <li className="col-span-2 h-[322px]">
@@ -142,61 +143,68 @@ export function MainNav() {
                       </ListItem>
                     ))}
                   </li>
+
                   <li className="bg-white rounded-lg p-1 col-span-2 h-[322px] overflow-y-auto">
-                    {data?.data.categories[
-                      catActiveData.categoryIndx
-                    ].children.map((item, indx) => (
-                      <ListItem
-                        onMouseOver={() =>
-                          setCatActiveData((prevData) => ({
-                            categoryIndx: prevData.categoryIndx,
-                            subCatIndx: indx,
-                            chilCatIndx: 0,
-                          }))
-                        }
-                        className={cn("hover:bg-accent", {
-                          "bg-accent": catActiveData.subCatIndx === indx,
-                        })}
-                        key={item.id}
-                        title={item.name}
-                        href={item.slug}
-                      >
-                        {item.name}
-                      </ListItem>
-                    ))}
+                    {
+                      //@ts-ignore
+                      data?.data.categories[
+                        catActiveData.categoryIndx
+                      ].children.map((item, indx) => (
+                        <ListItem
+                          onMouseOver={() =>
+                            setCatActiveData((prevData) => ({
+                              categoryIndx: prevData.categoryIndx,
+                              subCatIndx: indx,
+                              chilCatIndx: 0,
+                            }))
+                          }
+                          className={cn("hover:bg-accent", {
+                            "bg-accent": catActiveData.subCatIndx === indx,
+                          })}
+                          key={item.id}
+                          title={item.name}
+                          href={item.slug}
+                        >
+                          {item.name}
+                        </ListItem>
+                      ))
+                    }
                   </li>
                   <li className="bg-accent rounded-lg p-1 col-span-8 h-[322px] overflow-y-auto">
                     <div className="grid grid-cols-4 gap-3 ">
-                      {data?.data.categories[
-                        catActiveData.categoryIndx
-                      ].children[catActiveData.subCatIndx].children.map(
-                        (item, indx) => (
-                          <Link
-                            onMouseOver={() =>
-                              setCatActiveData((prevData) => ({
-                                categoryIndx: prevData.categoryIndx,
-                                subCatIndx: prevData.subCatIndx,
-                                chilCatIndx: indx,
-                              }))
-                            }
-                            className="bg-white flex  items-center gap-2 border border-slate-100 p-3 rounded-lg "
-                            key={item.id}
-                            title={item.name}
-                            href={item.slug}
-                          >
-                            <Image
-                              src={
-                                item.images?.logo ||
-                                "/images/default-product-image.png"
+                      {
+                        //@ts-ignore
+                        data?.data.categories[
+                          catActiveData.categoryIndx
+                        ].children[catActiveData.subCatIndx].children.map(
+                          (item, indx) => (
+                            <Link
+                              onMouseOver={() =>
+                                setCatActiveData((prevData) => ({
+                                  categoryIndx: prevData.categoryIndx,
+                                  subCatIndx: prevData.subCatIndx,
+                                  chilCatIndx: indx,
+                                }))
                               }
-                              height={50}
-                              width={50}
-                              alt={item.name}
-                            />
-                            <p className="text-sm font-medium">{item.name}</p>
-                          </Link>
+                              className="bg-white flex  items-center gap-2 border border-slate-100 p-3 rounded-lg "
+                              key={item.id}
+                              title={item.name}
+                              href={item.slug}
+                            >
+                              <Image
+                                src={
+                                  item.images?.logo ||
+                                  "/images/default-product-image.png"
+                                }
+                                height={50}
+                                width={50}
+                                alt={item.name}
+                              />
+                              <p className="text-sm font-medium">{item.name}</p>
+                            </Link>
+                          )
                         )
-                      )}
+                      }
                     </div>
                   </li>
                 </ul>
@@ -215,17 +223,19 @@ export function MainNav() {
               <NavigationMenuContent>
                 <div className="flex flex-col gap-5 bg-white px-9 py-5 ">
                   <div className="flex justify-between">
-                  <div className=" flex-1 ">
-                    <h2 className="font-heading text-lg font-bold leading-[1.1] md:text-2xl">
-                      Brands
-                    </h2>
-                    <p className=" text-sm text-muted-foreground ">
-                      Explore all the brands
-                    </p>
+                    <div className=" flex-1 ">
+                      <h2 className="font-heading text-lg font-bold leading-[1.1] md:text-2xl">
+                        Brands
+                      </h2>
+                      <p className=" text-sm text-muted-foreground ">
+                        Explore all the brands
+                      </p>
+                    </div>
+                    <Button className="text-sm h-8" size={"sm"}>
+                      View All
+                    </Button>
                   </div>
-                  <Button className="text-sm h-8" size={"sm"}>View All</Button>
-                  </div>
-                  
+
                   <ul className="grid   gap-10 grid-cols-6 w-full rounded-lg">
                     {brandsData?.data.brands.map((brand) => (
                       <li>
@@ -240,7 +250,9 @@ export function MainNav() {
                                 className="rounded-xl"
                               />
                             </div>
-                            <p className="text-sm font-medium text-center">{brand.name}</p>
+                            <p className="text-sm font-medium text-center">
+                              {brand.name}
+                            </p>
                           </div>
                         </Link>
                       </li>
@@ -261,17 +273,19 @@ export function MainNav() {
               <NavigationMenuContent>
                 <div className="flex flex-col gap-5 bg-white px-9 py-5 ">
                   <div className="flex justify-between">
-                  <div className=" flex-1 ">
-                    <h2 className="font-heading text-lg font-bold leading-[1.1] md:text-2xl">
-                    Packages
-                    </h2>
-                    <p className=" text-sm text-muted-foreground ">
-                      Explore all the brands
-                    </p>
+                    <div className=" flex-1 ">
+                      <h2 className="font-heading text-lg font-bold leading-[1.1] md:text-2xl">
+                        Packages
+                      </h2>
+                      <p className=" text-sm text-muted-foreground ">
+                        Explore all the brands
+                      </p>
+                    </div>
+                    <Button className="text-sm h-8" size={"sm"}>
+                      View All
+                    </Button>
                   </div>
-                  <Button className="text-sm h-8" size={"sm"}>View All</Button>
-                  </div>
-                  
+
                   <ul className="grid   gap-10 grid-cols-6 w-full rounded-lg">
                     {brandsData?.data.brands.map((brand) => (
                       <li>
@@ -286,7 +300,9 @@ export function MainNav() {
                                 className="rounded-xl"
                               />
                             </div>
-                            <p className="text-sm font-medium text-center">{brand.name}</p>
+                            <p className="text-sm font-medium text-center">
+                              {brand.name}
+                            </p>
                           </div>
                         </Link>
                       </li>
